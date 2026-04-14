@@ -1,8 +1,8 @@
 class Node {
-    constructor() {
-        this.node = node;
-        this.left = left; 
-        this.right = right;
+    constructor(value) {
+        this.data = value;
+        this.left = null; 
+        this.right = null;
     }
 }
 
@@ -24,8 +24,55 @@ class Tree {
     }
 
     buildTree(array) {
-        
+        let n = array.length;
+        if(n === 0) return null;
 
-        
+        let mid = Math.floor(n / 2);
+        let root = new Node(array[mid]);
+
+        let left = array.slice(0, mid);
+        let right = array.slice(mid + 1);
+
+        root.left = this.buildTree(left);
+        root.right = this.buildTree(right);
+
+        return root;
+    }
+
+    insert(value) {
+        let root = this.root;
+
+        while(root !== null) {
+            if (value === root.data) {
+                return;
+            }
+            else if(value < root.data) {
+                if(root.left === null) {
+                    root.left = new Node(value);
+                    return;
+                }else{
+                    root = root.left;
+                }
+            }
+            else if(value > root.data) {
+                if(root.right === null) {
+                    root.right = new Node(value);
+                    return;
+                }else{
+                    root = root.right;
+                }
+            }
+        }
+        if(this.root === null) {
+            this.root = new Node(value);
+            return;
+        }
     }
 }
+
+const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9]);
+
+console.log(test.root);
+console.log(test.root.data);
+console.log(test.root.left.data);
+console.log(test.root.right.data);
