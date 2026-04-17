@@ -68,6 +68,45 @@ class Tree {
             return;
         }
     }
+
+    deleteItem(value) {
+        const deleteNode = (node, value) => {
+            if(node === null) return null;
+
+            if(value < node.data) {
+                node.left = deleteNode(node.left, value);
+                return node;
+            }
+
+            if (value > node.data) {
+                node.right = deleteNode(node.right, value);
+                return node;
+            }
+
+            if(value === node.data) {
+                if(!node.left && !node.right) return null;
+
+                if(!node.left){
+                    return node.right;
+                }
+
+                if(!node.right) {
+                    return node.left;
+                }
+
+                if(node.right && node.left) {
+                    let newHead = node.right;
+                    while(newHead.left !== null){
+                        newHead = newHead.left;
+                    }
+                    node.data = newHead.data;
+                    node.right = deleteNode(node.right, newHead.data);
+                    return node;
+                }
+            }
+        }
+        this.root = deleteNode(this.root, value);
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9]);
