@@ -107,6 +107,24 @@ class Tree {
         }
         this.root = deleteNode(this.root, value);
     }
+
+    levelOrderForEach(callback) {
+        if(this.root === null) return;
+        let arr = [];
+
+        arr.push(this.root);
+
+        while(arr.length !== 0){
+            let node = arr.shift();
+            callback(node.data);
+            if(node.left) {
+                arr.push(node.left);
+            }
+            if(node.right) {
+                arr.push(node.right);
+            }
+        }
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9]);
