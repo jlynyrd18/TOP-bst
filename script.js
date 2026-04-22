@@ -125,6 +125,20 @@ class Tree {
             }
         }
     }
+
+    //inorder is left, root, right; preoder is root, left, right; postorder is left, right, root
+    inOrderForEach(callback) {
+        if(!callback){ 
+            throw new Error;
+        }
+        const traverse = (root) => {
+            if(root === null) return;
+            traverse(root.left);
+            callback(root.data);
+            traverse(root.right);
+        }
+        traverse(this.root);
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9]);
