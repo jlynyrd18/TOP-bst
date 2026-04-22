@@ -139,6 +139,19 @@ class Tree {
         }
         traverse(this.root);
     }
+
+    preOrderForEach(callback) {
+        if(!callback){
+            throw new Error;
+        }
+        const traverse = root => {
+            if(root === null) return;
+            callback(root.data);
+            traverse(root.left);
+            traverse(root.right);
+        }
+        traverse(this.root);
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9]);
