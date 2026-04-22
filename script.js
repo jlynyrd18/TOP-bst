@@ -144,13 +144,25 @@ class Tree {
         if(!callback){
             throw new Error;
         }
-        const traverse = root => {
+        const traverse = (root) => {
             if(root === null) return;
             callback(root.data);
             traverse(root.left);
             traverse(root.right);
         }
         traverse(this.root);
+    }
+
+    postOrderForEach(callback) {
+        if(!callback) {
+            throw new Error;
+        }
+        const traverse = (root) => {
+            if(root === null) return;
+            traverse(root.left);
+            traverse(root.right);
+            callback(root.data);
+        }
     }
 }
 
