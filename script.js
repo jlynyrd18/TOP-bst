@@ -163,6 +163,37 @@ class Tree {
             traverse(root.right);
             callback(root.data);
         }
+        traverse(this.root);
+    }
+
+    height(value) {
+        const path = (root) => {
+            if(root === null) return -1;
+            let left = path(root.left);
+            let right = path(root.right);
+            if(left > right){
+                left++;
+                return left;
+            }else{
+                right++;
+                return right;
+            }
+        }
+
+        const traverse = (value,root) => {
+            if(root === null) return undefined;
+            if(value > root.data) {
+                return traverse(value, root.right);
+            }
+            if(value < root.data) {
+                return traverse(value, root.left);
+            }
+            if(value === root.data) {
+                //call function to find longest path to leaf
+                return path(root);
+            }
+        }
+        return traverse(value, this.root);
     }
 }
 
