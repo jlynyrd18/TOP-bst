@@ -195,6 +195,22 @@ class Tree {
         }
         return traverse(value, this.root);
     }
+
+    depth(value) {
+        const traverse = (value, root, depth) => {
+            if(root === null) return undefined;
+            if(value > root.data) {
+                return traverse(value, root.right, depth +1);
+            }
+            if(value < root.data) {
+                return traverse(value, root.left, depth + 1);
+            }
+            if(value === root.data) {
+                return depth;
+            }
+        }
+        return traverse(value, this.root);
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9]);
