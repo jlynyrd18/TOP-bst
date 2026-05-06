@@ -211,6 +211,24 @@ class Tree {
         }
         return traverse(value, this.root);
     }
+
+    isBalanced() {
+        const traverse = (root) => {
+            if(root === null) return 0;
+
+            let left = traverse(root.left);
+            if(left === -1) return -1;
+
+            let right = traverse(root.right);
+            if(right === -1) return -1;
+
+            if(Math.abs(left - right) > 1) return -1;
+
+            return 1 + Math.max(left, right);
+
+        }
+        return traverse(this.root) !== -1;
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9]);
