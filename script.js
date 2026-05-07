@@ -229,11 +229,20 @@ class Tree {
         }
         return traverse(this.root) !== -1;
     }
+
+    rebalance() {
+        let arr = [];
+        const inOrderArr = (root) => {
+            if(root === null) return;
+            inOrderArr(root.left);
+            arr.push(root.data);
+            inOrderArr(root.right);
+        }
+        inOrderArr(this.root);
+        return this.buildTree(arr);
+    }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9]);
 
-console.log(test.root);
-console.log(test.root.data);
-console.log(test.root.left.data);
-console.log(test.root.right.data);
+console.log();
