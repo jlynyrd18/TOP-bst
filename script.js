@@ -238,11 +238,27 @@ class Tree {
             arr.push(root.data);
             inOrderArr(root.right);
         }
-        inOrderArr(this.root);
-        return this.buildTree(arr);
+        inOrderArr(this.root); 
+        let newRoot = this.buildTree(arr);
+        this.root = newRoot;
+        return this.root;
     }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9]);
 
-console.log();
+//console.log(test.isBalanced());
+//console.log(test.preOrderForEach(value => console.log(value)));
+//console.log(test.postOrderForEach(value => console.log(value)));
+//console.log(test.inOrderForEach(value => console.log(value)));
+console.log(test.insert([100]));
+console.log(test.insert([101]));
+console.log(test.insert([102]));
+console.log(test.insert([103]));
+console.log(test.insert([104]));
+console.log(test.isBalanced());
+console.log(test.rebalance());
+console.log(test.isBalanced());
+console.log(test.preOrderForEach(value => console.log(value)));
+console.log(test.postOrderForEach(value => console.log(value)));
+console.log(test.inOrderForEach(value => console.log(value)));
